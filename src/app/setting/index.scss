@@ -1,0 +1,70 @@
+.setting-container{
+  display: flex;
+  padding: 24px;
+}
+.setting-echarts{
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  #echarts-demo{
+    width: 80%;
+    height: 80%;
+  }
+}
+.setting-config{
+  flex: 1;
+  height: 100vh;
+  min-width: 200px;
+  overflow-y: auto;
+  .setting-common{
+    .group{
+      &-title{
+        color: #999;
+        margin-bottom: 24px;
+      }
+      &-item{
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 12px;
+        position: relative;
+        .label{
+          width: 8em;
+          display: inline-block;
+          text-align: right;
+        }
+        .ant-input, .ant-select, .ant-slider{
+          width: 2.4rem;
+          font-size: 12px;
+          display: inline-block;
+        }
+        p{
+          color: #999;
+          font-size: 10px;
+          font-weight: normal;
+        }
+        .color-block{
+          display: inline-block;
+          background: linear-gradient(to right, yellow, orange);
+          width: 30px;
+          height: 12px;
+        }
+        .sketch-picker{
+          position: absolute;
+          z-index: 9;
+        }
+      }
+      &-item.align{
+        display: flex;
+        align-items: center;
+      }
+      &-subTitle{
+        color: #999;
+        margin-bottom: 12px;
+        font-size: 12px;
+        font-weight: normal;
+      }
+    }
+  }
+}
