@@ -10,9 +10,7 @@ class SettingConfig extends React.Component{
     const { render } = this.props;
     return (
       <div className="setting-config">
-        <SettingCommon 
-          render={render}
-        />
+        <SettingCommon render={render} />
       </div>
     );
   }

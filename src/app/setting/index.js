@@ -17,7 +17,7 @@ class Setting extends React.Component{
     const { store } = this.props;
     let myChart = echarts.init(this.ref);
     let options = toJS(store.current.options);
-    myChart.setOption(!op? options: {title: 'opop'});
+    myChart.setOption(!op? options: {});
   }
   render () {
     return (

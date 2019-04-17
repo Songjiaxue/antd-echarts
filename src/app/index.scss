@@ -1,0 +1,20 @@
+.app{
+  &-header{
+    overflow: auto;
+    position: fixed;
+    width: 100%;
+    z-index: 99;
+  }
+  &-container{
+    margin-top: 64px;
+  }
+  &-sider{
+    overflow: auto;
+    position: fixed;
+    height: 100vh;
+    left: 0;
+  }
+  &-content{
+    margin-left: 200px;
+  }
+}

@@ -1,4 +1,5 @@
-import { observable, action } from 'mobx';
+import { observable, action, toJS } from 'mobx';
+import _ from 'loadsh';
 import config from '../app/menu/config';
 
 class TypeStore {
@@ -17,13 +18,8 @@ class TypeStore {
     sessionStorage.setItem('_current', JSON.stringify(data));
   }
   @action updateCurrentOptions = (key, data) => {
-    let before = JSON.parse(JSON.stringify(this.current.options));
-    if (key.length > 1) {
-      before[key[0]] = before[key[0]] || {};
-      before[key[0]][key[1]] = data;
-    } else {
-      before[key[0]] = data;
-    }
+    let before = toJS(this.current.options);
+    _.set(before, key, data);
     this.current = Object.assign({}, this.current, { options: before });
   }
 }

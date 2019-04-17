@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import AppMenu from './menu';
 import Config from './config';
 import Setting from './setting';
+import './index.scss';
 
 
 const {
@@ -14,13 +15,15 @@ const {
 class AppContent extends Component {
   render() {
     return (
-      <Layout>
-        <Header>Header</Header>
-        <Layout>
-          <Sider>
+      <Layout className="app">
+        <Header className="app-header">Header</Header>
+        <Layout className="app-container">
+          <Sider className="app-sider">
             <AppMenu />
           </Sider>
-          <Layout>
+          <Layout
+            className="app-content"
+          >
             <Content>
               <Switch>
                 <Route path="/config" component={Config} />

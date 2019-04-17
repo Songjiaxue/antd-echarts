@@ -9,7 +9,22 @@ export default [
         options: {
           xAxis: {
               type: 'category',
-              data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+              data: [
+                {
+                  value: '1',
+                  textStyle: {
+                    color: '#1890ff',
+                    fontSize: 20,
+                  },
+                },
+                {
+                  value: '2',
+                  textStyle: {
+                    color: '#444',
+                    fontSize: 20,
+                  },
+                },
+              ]
           },
           yAxis: {
               type: 'value'
@@ -17,9 +32,15 @@ export default [
           series: [{
               data: [820, 932, 901, 934, 1290, 1330, 1320],
               type: 'line'
-          }]
+          }],
+          title: {
+            text: '123',
+            textStyle: {
+              fontSize: 28
+            }
+          }
         }
-      },
+      },  
       {
         title: 'Basic Area Chart',
         url: require('../../assets/line/area-basic.png'),
