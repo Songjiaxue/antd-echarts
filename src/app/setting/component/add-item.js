@@ -1,10 +1,11 @@
 import React from 'react';
-import { Modal, Tabs, Switch, Input, Select, Slider } from 'antd';
+import { Modal, Tabs, Switch, Input, Select, Slider, Collapse } from 'antd';
 import _ from 'loadsh';
 import ColorSelect from './color-select';
 import '../index.scss';
 
 const TabPane = Tabs.TabPane;
+const Panel = Collapse.Panel;
 
 class AddItem extends React.Component{
   constructor(props) {
@@ -112,15 +113,15 @@ class AddItem extends React.Component{
             </div>
           );
         default:
+              console.log(v.label);
           return (
-            <React.Fragment key={i}>
-              <div className="group-subTitle">{v.label}：</div>
-              <div className="group-sub">
+            <Collapse key={i}>
+              <Panel header={v.label}>
                 {
                   this.renderContent(r, v.item)
                 }
-              </div>
-            </React.Fragment>
+              </Panel>
+            </Collapse>
           );
         }
     });
@@ -129,7 +130,7 @@ class AddItem extends React.Component{
   mixinsValue = (v, item) => {
     return item.map(p => {
       if (p.item) {
-        return this.mixinsValue(v, p.item);
+        return Object.assign({}, p, {item: this.mixinsValue(v, p.item)});
       } 
       return Object.assign({}, p, {defaultValue:  _.get(v, p.attr, p.defaultValue)});
     });
@@ -148,8 +149,9 @@ class AddItem extends React.Component{
         });
       } else {
           // 若为对象则按路径去defaultvalue读值再设置
-        newItem = this.mixinsValue(v, e.item).flat();
+        newItem = this.mixinsValue(v, e.item);
       }
+      console.log(newItem, 'newItem');
       return {
         key: `${i}`,
         title: `第${i + 1}项`,

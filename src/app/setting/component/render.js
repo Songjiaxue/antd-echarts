@@ -1,10 +1,11 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
 import { toJS } from 'mobx';
-import { Switch, Input, Icon, Select, Slider, Collapse  } from 'antd';
+import { Switch, Input, Select, Slider, Collapse  } from 'antd';
 import _ from 'loadsh';
 import ColorSelect from './color-select';
 import AddItem from '../component/add-item';
+
 const Panel = Collapse.Panel;
 
 @inject('store')
@@ -21,6 +22,11 @@ class RenderGroup extends React.Component{
     const { render, store } = this.props;
     store.updateCurrentOptions(key, data);
     render();
+  }
+  resizeEcharts = (key, data) => {
+    const { render, store } = this.props;
+    store.updateCurrentOptions(key, data);
+    render(true);
   }
   renderItem = (t) => {
     const { store: { current, } } = this.props;
@@ -83,11 +89,15 @@ class RenderGroup extends React.Component{
                 min={v.range[0]}
                 max={v.range[1]}
                 onChange={(e) => {
+                  if (v.isContainer) {
+                    this.resizeEcharts(v.attr, e);
+                  }
                   this.renderEcharts(v.attr, e);
                 }}
                 step={v.step || 1}
                 defaultValue={defaultValue}
               />
+              <span>{defaultValue ? `${defaultValue}px` : ''}</span>
             </div>
           );
         case 'input':

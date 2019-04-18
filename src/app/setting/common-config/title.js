@@ -68,6 +68,7 @@ export default [
       {
         label: '副标题样式',
         item: [
+          
           {
             type: 'colorSelect',
             label: '颜色',

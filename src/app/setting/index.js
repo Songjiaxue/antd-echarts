@@ -17,7 +17,15 @@ class Setting extends React.Component{
     const { store } = this.props;
     let myChart = echarts.init(this.ref);
     let options = toJS(store.current.options);
-    myChart.setOption(!op? options: {});
+    if (op) {
+      myChart.resize({
+        width: options.containerWidth,
+        height: options.containerHeight,
+      });
+    } else {
+      myChart.setOption(options);
+    }
+    
   }
   render () {
     return (
