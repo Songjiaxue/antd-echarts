@@ -27,13 +27,13 @@
       margin-bottom: 12px;
       position: relative;
       .label{
-        width: 10em;
+        width: 9em;
         display: inline-block;
-        text-align: right;
+        // text-align: right;
         margin-right: 5px;
       }
       .ant-input, .ant-select, .ant-slider{
-        width: 2.4rem;
+        width: 2rem;
         font-size: 12px;
         display: inline-block;
       }

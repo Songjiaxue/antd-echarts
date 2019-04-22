@@ -7,6 +7,10 @@ import grid from './common-config/grid';
 import xAxis from './common-config/xAxis';
 import yAxis from './common-config/yAxis';
 import tooltip from './common-config/tooltip';
+import toolbox from './common-config/toolbox';
+import series from './series/index';
+import dataZoom from './dataZoom/index';
+import legend from './common-config/legend';
 
 @inject('store')
 @observer
@@ -20,10 +24,14 @@ class SettingCommon extends React.Component{
           config={[
             ...size,
             ...title,
+            ...legend,
             ...grid,
             ...xAxis,
             ...yAxis,
+            ...dataZoom,
             ...tooltip,
+            ...toolbox,
+            ...series,
           ]}
         />
       </div>

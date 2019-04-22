@@ -5,6 +5,7 @@ import { Switch, Input, Select, Slider, Collapse  } from 'antd';
 import _ from 'loadsh';
 import ColorSelect from './color-select';
 import AddItem from '../component/add-item';
+import ChangeItem from './change-item';
 
 const Panel = Collapse.Panel;
 
@@ -56,6 +57,7 @@ class RenderGroup extends React.Component{
               }}
               key={i}
               title={v.label}
+              desc={v.desc}
             />
           );
         case 'select':
@@ -71,6 +73,7 @@ class RenderGroup extends React.Component{
                 }}
                 placeholder="请选择"
                 defaultValue={defaultValue}
+                {...v.otherParams}
               >
                 {
                   v.options.map(y => <Select.Option key={y}>{y}</Select.Option>)
@@ -89,15 +92,15 @@ class RenderGroup extends React.Component{
                 min={v.range[0]}
                 max={v.range[1]}
                 onChange={(e) => {
+                  const value = v.format ? v.format(e) : e;
                   if (v.isContainer) {
-                    this.resizeEcharts(v.attr, e);
+                    this.resizeEcharts(v.attr, value);
                   }
-                  this.renderEcharts(v.attr, e);
+                  this.renderEcharts(v.attr, value);
                 }}
                 step={v.step || 1}
-                defaultValue={defaultValue}
+                defaultValue={isNaN(Number(defaultValue)) ? v.range[0] : Number(defaultValue)}
               />
-              <span>{defaultValue ? `${defaultValue}px` : ''}</span>
             </div>
           );
         case 'input':
@@ -136,6 +139,9 @@ class RenderGroup extends React.Component{
               >
               添加或编辑类目
               </span>
+              {
+                v.desc && v.desc.map((e, r) => <p key={r}>{e}</p>)
+              }
             </div>
           );
         default:
@@ -152,10 +158,26 @@ class RenderGroup extends React.Component{
     });
   }
   renderGroup = (group) => {
+    const { store: { current, } } = this.props;
     return group.map((v, i) => {
+      const defaultValue = _.get(toJS(current.options), v.attr, v.defaultValue);
       return (
         <Collapse key={i}>
-          <Panel header={v.title}>
+          <Panel
+            header={v.title}
+            extra={v.type === 'change' && (
+              <span 
+                className="add-item"
+                onClick={() => {
+                  // v: 当前项的所有配置
+                  // defaultValue: 当前项的所有value值
+                  this.changeItem.show(v, defaultValue);
+                }}
+              >
+              添加或编辑项
+              </span>    
+            )}
+          >
             {v.item && this.renderItem(v.item)}
           </Panel>
         </Collapse> 
@@ -171,6 +193,10 @@ class RenderGroup extends React.Component{
         }
         <AddItem
           ref={ref => this.addItem = ref}
+          onOk={this.renderEcharts}
+        />
+        <ChangeItem
+          ref={ref => this.changeItem = ref}
           onOk={this.renderEcharts}
         />
       </div>

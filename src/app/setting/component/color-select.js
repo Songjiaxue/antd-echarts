@@ -10,7 +10,7 @@ class ColorSelect extends React.Component{
   }
   render () {
     const { show } = this.state;
-    const { title } = this.props;
+    const { title, desc } = this.props;
     return (
       <div className="group-item">
         <span className="label">{title}：</span>
@@ -31,6 +31,9 @@ class ColorSelect extends React.Component{
               }}
             /> 
           )
+        }
+        {
+          desc && desc.map((e, r) => <p key={r}>{e}</p>)
         }
       </div>
     );

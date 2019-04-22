@@ -20,6 +20,137 @@ export default [
         ],
       },
       {
+        label: '坐标轴指示器配置项',
+        item: [
+          {
+            type: 'select',
+            label: '指示器类型',
+            attr: ['tooltip', 'axisPointer', 'type'],
+            defaultValue: 'line',
+            options: [
+              'line',
+              'shadow',
+              'none',
+              'cross'
+            ],
+          },
+          {
+            label: '坐标轴指示器的文本标签',
+            item: [
+              {
+                label: '显示',
+                type: 'switch',
+                defaultValue: false,
+                attr: ['tooltip', 'axisPointer', 'label', 'show'],
+              },
+              {
+                type: 'slider',
+                label: 'label 距离轴的距离',
+                attr: ['tooltip', 'axisPointer', 'label', 'margin'],
+                defaultValue: 3,
+                range: [0, 100],
+              },
+              {
+                type: 'colorSelect',
+                label: '文字颜色',
+                attr: ['tooltip', 'axisPointer', 'label', 'color'],
+                defaultValue: '#fff'
+              },
+              {
+                type: 'select',
+                label: '文字字体的风格',
+                attr: ['tooltip', 'axisPointer', 'label', 'fontStyle'],
+                defaultValue: 'normal',
+                options: [
+                  'normal',
+                  'italic',
+                  'oblique',
+                ],
+              },
+              {
+                type: 'select',
+                label: '文字字体粗细',
+                attr: ['tooltip', 'axisPointer', 'label', 'fontWeight'],
+                defaultValue: 'normal',
+                options: [
+                  'normal',
+                  'bold',
+                  'bolder',
+                  'lighter',
+                ],
+              },
+              {
+                type: 'slider',
+                label: '文字字体大小',
+                attr: ['tooltip', 'axisPointer', 'label', 'fontSize'],
+                defaultValue: 12,
+                range: [12, 72],
+              },
+              {
+                type: 'slider',
+                label: '行高',
+                attr: ['tooltip', 'axisPointer', 'label', 'lineHeight'],
+                range: [12, 72],
+              },
+              {
+                type: 'input',
+                label: '内边距',
+                attr: ['tooltip', 'axisPointer', 'label', 'padding'],
+                defaultValue: 5,
+                format: (e) => {
+                  return e.indexOf(',') > -1 ?
+                    e.split(',').map(v => isNaN(parseFloat(v.trim()) ? 0 : v.trim()))
+                      : isNaN(parseFloat(e.trim())) ? 0 : e.trim()
+                },
+              },
+              {
+                type: 'colorSelect',
+                label: '文字标签背景颜色',
+                attr: ['tooltip', 'axisPointer', 'label', 'backgroundColor'],
+              },
+              {
+                type: 'colorSelect',
+                label: '文字标签边框颜色',
+                attr: ['tooltip', 'axisPointer', 'label', 'borderColor'],
+              },
+              {
+                type: 'slider',
+                label: '文字标签边框宽度',
+                attr: ['tooltip', 'axisPointer', 'label', 'borderWidth'],
+                range: [0, 10],
+              },
+              {
+                type: 'slider',
+                label: '图形阴影模糊大小',
+                attr: ['tooltip', 'axisPointer', 'label', 'shadowBlur'],
+                range: [0, 100],
+                defaultValue: 3,
+              },
+              {
+                type: 'colorSelect',
+                label: '图形阴影颜色',
+                attr: ['tooltip', 'axisPointer', 'label', 'shadowColor'],
+                defaultValue: '#aaa',
+              },
+              {
+                type: 'slider',
+                label: '阴影水平方向上的偏移距离',
+                attr: ['tooltip', 'axisPointer', 'label', 'shadowOffsetX'],
+                range: [0, 10],
+                defaultValue: 0,
+              },
+              {
+                type: 'slider',
+                label: '阴影垂直方向上的偏移距离',
+                attr: ['tooltip', 'axisPointer', 'label', 'shadowOffsetY'],
+                range: [0, 10],
+                defaultValue: 0,
+              },
+            ],
+          },
+        ],
+      },
+      {
         label: '显示提示框浮层',
         type: 'switch',
         defaultValue: true,

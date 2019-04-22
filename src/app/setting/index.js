@@ -12,6 +12,14 @@ const echarts = require('echarts')
 class Setting extends React.Component{
   componentDidMount() {
     this.renderEcharts();
+    window.addEventListener('resize', this.resizeCharts);
+  }
+  componentWillUnmount() {       
+    window.removeEventListener('resize',this.resizeCharts);
+  }
+  resizeCharts = () => {
+    let myChart = echarts.init(this.ref);
+    myChart.resize();
   }
   renderEcharts = (op) => {
     const { store } = this.props;

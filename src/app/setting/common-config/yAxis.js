@@ -32,7 +32,7 @@ export default [
       },
       {
         label: '坐标轴名称',
-        attr: ['name', 'text'],
+        attr: ['yAxis', 'text'],
         type: 'input'
       },
       {
@@ -221,15 +221,6 @@ export default [
             attr: ['yAxis', 'axisTick', 'show'],
           },
           {
-            label: '刻度线和标签对齐',
-            type: 'switch',
-            defaultValue: false,
-            attr: ['yAxis', 'axisTick', 'boundaryGap'],
-            desc: [
-              "类目轴中在 boundaryGap 为 true 的时候有效"
-            ],
-          },
-          {
             type: 'slider',
             label: '坐标轴刻度的长度',
             attr: ['title', 'axisTick', 'length'],
@@ -392,6 +383,10 @@ export default [
         label: '类目数据',
         type: 'add',
         attr: ['yAxis', 'data'],
+        desc: [
+          "在类目轴（type: 'category'）中有效",
+          "如果设置了 type 是 'category'，但没有设置 axis.data，则 axis.data 的内容会自动从 series.data 中获取"
+        ],
         item: [
           {
             label: '类目名称',

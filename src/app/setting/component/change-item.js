@@ -7,16 +7,55 @@ import '../index.scss';
 const TabPane = Tabs.TabPane;
 const Panel = Collapse.Panel;
 
-class AddItem extends React.Component{
+class ChangeItem extends React.Component{
   constructor(props) {
     super(props);
-    
     this.state = {
       visible: false,
-      data: null, // 当前项的配置信息
-      panes: [], // tabpane
-      res: {}, // tabpane每一项的值，键值为tabpane key
+      panes: [],
+      data: null,
+      res: {},
     }
+  }
+  mixinsValue = (v, item) => {
+    return item.map(p => {
+      let defaultValue = _.get(v, p.attr, p.defaultValue);
+      if (p.item) {
+        return Object.assign({}, p, {item: this.mixinsValue(v, p.item)});
+      } 
+      if (p.key === 'data') {
+        if (defaultValue) {
+          if (defaultValue && typeof(defaultValue[0]) === 'object' ) {
+            defaultValue = defaultValue.map(v => v.join(',')).join(';')
+          } else {
+            defaultValue = defaultValue.join(',');
+          }
+        }
+      }
+      return Object.assign({}, p, {defaultValue,});
+    });
+  }
+  getContent = (e, defaultValue = []) => {
+    console.log(e, defaultValue);
+    const type = e.changeItem.filter(v => v.onChange)[0];
+    // show之前需要将defaultValue与配置文件融合 
+    return defaultValue.map((v, i) => {
+      let newItem = [
+        ...e.changeItem.filter(r => !r.isChange),
+        ...type.onChange(v.type).map(r => Object.assign({}, r, {isChange: true})),
+      ];
+      return {
+        key: `${i}`,
+        title: `第${i + 1}项`,
+        content: this.renderContent(`${i}`, this.mixinsValue(v, newItem)),
+      };
+    });
+  }
+  getRes = (defaultValue = []) => {
+    // tabpane的每一项的配置， 键值默认为数组索引
+    let obj = {};
+    defaultValue.forEach((t, i) => obj[i] = t);
+    return obj;
   }
   updateRes = (key, attr, value) => {
     const { res } = this.state;
@@ -64,6 +103,22 @@ class AddItem extends React.Component{
               <span className="label">{v.label}：</span>
               <Select 
                 onChange={(e) => {
+                  const { data, panes } = this.state;
+                  const changeItem = [
+                    ...data.changeItem.filter(u => !u.isChange),
+                    ...v.onChange ? v.onChange(e).map(q => Object.assign({}, q, { isChange: true,})) : [],
+                  ];
+                  const p = panes.map(i => {
+                    if (i.key === r) {
+                      return Object.assign({}, i, {
+                        content: this.renderContent(r, changeItem),
+                      });
+                    }
+                    return i;
+                  });
+                  this.setState({
+                    panes: p
+                  });
                   this.updateRes(r, v.attr, e);
                 }}
                 placeholder="请选择"
@@ -113,7 +168,6 @@ class AddItem extends React.Component{
             </div>
           );
         default:
-              console.log(v.label);
           return (
             <Collapse key={i}>
               <Panel header={v.label}>
@@ -126,51 +180,6 @@ class AddItem extends React.Component{
         }
     });
   }
-
-  mixinsValue = (v, item) => {
-    return item.map(p => {
-      if (p.item) {
-        return Object.assign({}, p, {item: this.mixinsValue(v, p.item)});
-      } 
-      return Object.assign({}, p, {defaultValue:  _.get(v, p.attr, p.defaultValue)});
-    });
-  }
-  getContent = (e, defaultValue = []) => {
-    let newItem = [];
-    // show之前需要将defaultValue与配置文件融合 
-    return defaultValue.map((v, i) => {
-      // 如果defaultValue的每一项是字符串则将键值为key的值设值
-      if (typeof v !== 'object') {
-        newItem = e.item.map(t => {
-          if (t.key === 'value') {
-            return Object.assign({}, t, { defaultValue: v, });
-          } 
-          return t;
-        });
-      } else {
-          // 若为对象则按路径去defaultvalue读值再设置
-        newItem = this.mixinsValue(v, e.item);
-      }
-      return {
-        key: `${i}`,
-        title: `第${i + 1}项`,
-        content: this.renderContent(`${i}`, newItem),
-      };
-    });
-  }
-  getRes = (defaultValue = []) => {
-    // tabpane的每一项的配置， 键值默认为数组索引
-    let obj = {};
-    defaultValue.forEach((t, i) => {
-      if (typeof t !== 'object') {
-        obj[i] = {value: t};
-      } else {
-        obj[i] = t;
-      }
-    });
-    return obj;
-  }
-  
   // tabpane根据defaultValue生成
   show = (e, defaultValue) => {
     this.setState({
@@ -196,7 +205,7 @@ class AddItem extends React.Component{
     }
   }
   add = () => {
-    const { panes, data: {item: t, } } = this.state;
+    const { panes, data: {changeItem: t, }} = this.state;
     const newItem = {
       key: `${panes.length}`,
       title: `第${panes.length + 1}项`,
@@ -261,4 +270,4 @@ class AddItem extends React.Component{
     );
   }
 }
-export default AddItem;
+export default ChangeItem;
