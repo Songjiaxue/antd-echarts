@@ -58,29 +58,10 @@ export default [
         range: [0, 1000],
       },
       {
-        label: '是否包含坐标轴的刻度标签',
-        type: 'switch',
-        defaultValue: false,
-        attr: ['grid', 'containLabel'],
-      },
-      {
         type: 'colorSelect',
         label: '网格背景色',
         attr: ['grid', 'backgroundColor'],
         defaultValue: 'transparent'
-      },
-      {
-        type: 'colorSelect',
-        label: '网格边框色',
-        attr: ['grid', 'borderColor'],
-        defaultValue: '#ccc',
-      },
-      {
-        type: 'slider',
-        label: '网格边框线宽',
-        attr: ['grid', 'borderWidth'],
-        defaultValue: 1,
-        range: [0, 100],
       },
     ],
   },

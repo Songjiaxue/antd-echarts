@@ -22,17 +22,7 @@ export default [
             attr: ['title', 'textStyle', 'color'],
             defaultValue: '#333'
           },
-          {
-            type: 'select',
-            label: '字体风格',
-            attr: ['title', 'textStyle', 'fontStyle'],
-            defaultValue: 'normal',
-            options: [
-              'normal',
-              'italic',
-              'oblique',
-            ],
-          },
+          
           {
             type: 'select',
             label: '字体粗细',
@@ -50,12 +40,6 @@ export default [
             label: '字体大小',
             attr: ['title', 'textStyle', 'fontSize'],
             defaultValue: 18,
-            range: [12, 72],
-          },
-          {
-            type: 'slider',
-            label: '行高',
-            attr: ['title', 'textStyle', 'lineHeight'],
             range: [12, 72],
           },
         ],
@@ -78,17 +62,6 @@ export default [
           },
           {
             type: 'select',
-            label: '字体风格',
-            attr: ['title', 'subtextStyle', 'fontStyle'],
-            defaultValue: 'normal',
-            options: [
-              'normal',
-              'italic',
-              'oblique',
-            ],
-          },
-          {
-            type: 'select',
             label: '字体粗细',
             attr: ['title', 'subtextStyle', 'fontWeight'],
             defaultValue: 'normal',
@@ -106,36 +79,6 @@ export default [
             defaultValue: 12,
             range: [12, 72],
           },
-          {
-            type: 'slider',
-            label: '行高',
-            attr: ['title', 'subtextStyle', 'lineHeight'],
-            range: [12, 72],
-          },
-        ],
-      },
-      {
-        type: 'select',
-        label: '水平对齐',
-        attr: ['title', 'textAlign'],
-        defaultValue: 'auto',
-        options: [
-          'auto',
-          'left',
-          'right',
-          'center',
-        ],
-      },
-      {
-        type: 'select',
-        label: '垂直对齐',
-        attr: ['title', 'textVerticalAlign'],
-        defaultValue: 'auto',
-        options: [
-          'auto',
-          'top',
-          'bottom',
-          'middle',
         ],
       },
       {

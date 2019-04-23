@@ -32,7 +32,7 @@ export default [
       },
       {
         label: '坐标轴名称',
-        attr: ['yAxis', 'text'],
+        attr: ['yAxis', 'name'],
         type: 'input'
       },
       {
@@ -57,17 +57,6 @@ export default [
           },
           {
             type: 'select',
-            label: '字体风格',
-            attr: ['yAxis', 'textStyle', 'fontStyle'],
-            defaultValue: 'normal',
-            options: [
-              'normal',
-              'italic',
-              'oblique',
-            ],
-          },
-          {
-            type: 'select',
             label: '字体粗细',
             attr: ['yAxis', 'textStyle', 'fontWeight'],
             defaultValue: 'normal',
@@ -85,36 +74,6 @@ export default [
             defaultValue: 18,
             range: [12, 72],
           },
-          {
-            type: 'slider',
-            label: '行高',
-            attr: ['yAxis', 'textStyle', 'lineHeight'],
-            range: [12, 72],
-          },
-          {
-            type: 'select',
-            label: '水平对齐',
-            attr: ['yAxis', 'textStyle', 'align'],
-            defaultValue: 'auto',
-            options: [
-              'auto',
-              'left',
-              'right',
-              'center',
-            ],
-          },
-          {
-            type: 'select',
-            label: '垂直对齐',
-            attr: ['yAxis', 'textStyle', 'verticalAlign'],
-            defaultValue: 'auto',
-            options: [
-              'auto',
-              'top',
-              'bottom',
-              'middle',
-            ],
-          },
         ],
       },
       {
@@ -129,24 +88,6 @@ export default [
         label: '坐标轴名字旋转',
         attr: ['yAxis', 'nameRotate'],
         range: [0, 360],
-      },
-      {
-        type: 'slider',
-        label: '坐标轴最小间隔大小',
-        attr: ['yAxis', 'minInterval'],
-        range: [0, 1000],
-      },
-      {
-        type: 'slider',
-        label: '坐标轴最大间隔大小',
-        attr: ['yAxis', 'maxInterval'],
-        range: [0, 1000],
-      },
-      {
-        type: 'slider',
-        label: '强制设置间隔大小',
-        attr: ['yAxis', 'interval'],
-        range: [0, 1000],
       },
       {
         label: '坐标轴轴线相关设置',
@@ -183,81 +124,8 @@ export default [
               },
               {
                 type: 'slider',
-                label: '坐标轴线线宽',
-                attr: ['yAxis', 'axisLine', 'lineStyle', 'width'],
-                defaultValue: 1,
-                range: [1, 20],
-              },
-              {
-                type: 'select',
-                label: '坐标轴线线的类型',
-                attr: ['yAxis', 'axisLine', 'lineStyle', 'type'],
-                defaultValue: 'solid',
-                options: [
-                  'solid',
-                  'dashed',
-                  'dotted',
-                ],
-              },
-              {
-                type: 'slider',
                 label: '图形透明度',
                 attr: ['yAxis', 'axisLine', 'lineStyle', 'opacity'],
-                defaultValue: 1,
-                range: [0, 1],
-                step: 0.1,
-              },
-            ],
-          },
-        ],
-      },
-      {
-        label: '坐标轴刻度相关设置',
-        item: [
-          {
-            label: '显示',
-            type: 'switch',
-            defaultValue: true,
-            attr: ['yAxis', 'axisTick', 'show'],
-          },
-          {
-            type: 'slider',
-            label: '坐标轴刻度的长度',
-            attr: ['title', 'axisTick', 'length'],
-            defaultValue: 5,
-            range: [0, 10],
-          },
-          {
-            label: '坐标轴刻度线样式',
-            item: [
-              {
-                type: 'colorSelect',
-                label: '颜色',
-                attr: ['yAxis', 'axisTick', 'lineStyle', 'color'],
-                defaultValue: '#333'
-              },
-              {
-                type: 'slider',
-                label: '坐标轴线线宽',
-                attr: ['yAxis', 'axisTick', 'lineStyle', 'width'],
-                defaultValue: 1,
-                range: [1, 20],
-              },
-              {
-                type: 'select',
-                label: '坐标轴线线的类型',
-                attr: ['yAxis', 'axisTick', 'lineStyle', 'type'],
-                defaultValue: 'solid',
-                options: [
-                  'solid',
-                  'dashed',
-                  'dotted',
-                ],
-              },
-              {
-                type: 'slider',
-                label: '图形透明度',
-                attr: ['yAxis', 'axisTick', 'lineStyle', 'opacity'],
                 defaultValue: 1,
                 range: [0, 1],
                 step: 0.1,
@@ -295,17 +163,6 @@ export default [
           },
           {
             type: 'select',
-            label: '字体风格',
-            attr: ['yAxis', 'axisLabel', 'fontStyle'],
-            defaultValue: 'normal',
-            options: [
-              'normal',
-              'italic',
-              'oblique',
-            ],
-          },
-          {
-            type: 'select',
             label: '字体粗细',
             attr: ['yAxis', 'axisLabel', 'fontWeight'],
             defaultValue: 'normal',
@@ -321,12 +178,6 @@ export default [
             label: '字体大小',
             attr: ['yAxis', 'axisLabel', 'fontSize'],
             defaultValue: 12,
-            range: [12, 72],
-          },
-          {
-            type: 'slider',
-            label: '行高',
-            attr: ['yAxis', 'axisLabel', 'lineHeight'],
             range: [12, 72],
           },
         ],
@@ -348,24 +199,6 @@ export default [
                 label: '颜色',
                 attr: ['yAxis', 'splitLine', 'lineStyle', 'color'],
                 defaultValue: '#333'
-              },
-              {
-                type: 'slider',
-                label: '坐标轴线线宽',
-                attr: ['yAxis', 'splitLine', 'lineStyle', 'width'],
-                defaultValue: 1,
-                range: [1, 20],
-              },
-              {
-                type: 'select',
-                label: '坐标轴线线的类型',
-                attr: ['yAxis', 'splitLine', 'lineStyle', 'type'],
-                defaultValue: 'solid',
-                options: [
-                  'solid',
-                  'dashed',
-                  'dotted',
-                ],
               },
               {
                 type: 'slider',
@@ -406,18 +239,6 @@ export default [
               },
               {
                 type: 'select',
-                label: '字体风格',
-                attr: ['textStyle', 'fontStyle'],
-                defaultValue: 'normal',
-                key: 'fontStyle',
-                options: [
-                  'normal',
-                  'italic',
-                  'oblique',
-                ],
-              },
-              {
-                type: 'select',
                 label: '字体粗细',
                 attr: ['textStyle', 'fontWeight'],
                 defaultValue: 'normal',
@@ -436,13 +257,6 @@ export default [
                 defaultValue: 12,
                 range: [12, 72],
                 key: 'fontSize',
-              },
-              {
-                type: 'slider',
-                label: '行高',
-                attr: ['textStyle', 'lineHeight'],
-                range: [12, 72],
-                key: 'lineHeight',
               },
             ],
           },

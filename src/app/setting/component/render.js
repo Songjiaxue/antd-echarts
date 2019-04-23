@@ -22,6 +22,7 @@ class RenderGroup extends React.Component{
   renderEcharts = (key, data) => {
     const { render, store } = this.props;
     store.updateCurrentOptions(key, data);
+    console.log(toJS(store.current));
     render();
   }
   resizeEcharts = (key, data) => {
@@ -53,11 +54,10 @@ class RenderGroup extends React.Component{
           return (
             <ColorSelect 
               onChange={(e) => {
-                this.renderEcharts(v.attr, e.hex);
+                this.renderEcharts(v.attr, e);
               }}
               key={i}
-              title={v.label}
-              desc={v.desc}
+              item={v}
             />
           );
         case 'select':

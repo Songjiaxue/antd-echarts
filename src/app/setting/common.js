@@ -9,7 +9,7 @@ import yAxis from './common-config/yAxis';
 import tooltip from './common-config/tooltip';
 import toolbox from './common-config/toolbox';
 import series from './series/index';
-import dataZoom from './dataZoom/index';
+// import dataZoom from './dataZoom/index';
 import legend from './common-config/legend';
 
 @inject('store')
@@ -28,7 +28,7 @@ class SettingCommon extends React.Component{
             ...grid,
             ...xAxis,
             ...yAxis,
-            ...dataZoom,
+            // ...dataZoom,
             ...tooltip,
             ...toolbox,
             ...series,

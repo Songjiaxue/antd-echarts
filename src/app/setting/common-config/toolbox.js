@@ -1,6 +1,6 @@
 export default [
   {
-    title: '工具栏。内置有导出图片，数据视图，动态类型切换，数据区域缩放，重置五个工具。',
+    title: '工具栏。内置有导出图片，数据视图，动态类型切换，数据区域缩放，重置。',
     item: [
       {
         label: '显示',
@@ -90,40 +90,6 @@ export default [
                     label: '颜色',
                     attr: ['toolbox', 'saveAsImage', 'iconStyle', 'color'],
                   },
-                  {
-                    type: 'colorSelect',
-                    label: '图标描边颜色',
-                    attr: ['toolbox', 'saveAsImage', 'iconStyle', 'borderColor'],
-                    defaultValue: '#666',
-                  },
-                  {
-                    type: 'slider',
-                    label: '图标描边宽度',
-                    attr: ['toolbox', 'saveAsImage', 'iconStyle', 'borderWidth'],
-                    defaultValue: 1,
-                    range: [0, 10],
-                  },
-                  {
-                    type: 'select',
-                    label: '图标描边类型',
-                    attr: ['toolbox', 'saveAsImage', 'iconStyle', 'borderType'],
-                    defaultValue: 'solid',
-                    options: [
-                      'solid',
-                      'dashed',
-                      'dotted',
-                    ],
-                  },
-                ],
-              },
-              {
-                label: '保存图片的分辨率比例',
-                type: 'slider',
-                attr: ['toolbox', 'feature', 'saveAsImage', 'pixelRatio'],
-                defaultValue: 1,
-                range: [1, 10],
-                desc: [
-                  "默认跟容器相同大小，如果需要保存更高分辨率的，可以设置为大于 1 的值，例如 2"
                 ],
               },
             ],
@@ -150,30 +116,6 @@ export default [
                     type: 'colorSelect',
                     label: '颜色',
                     attr: ['toolbox',  'feature', 'restore', 'iconStyle', 'color'],
-                  },
-                  {
-                    type: 'colorSelect',
-                    label: '图标描边颜色',
-                    attr: ['toolbox', 'feature',  'restore', 'iconStyle', 'borderColor'],
-                    defaultValue: '#666',
-                  },
-                  {
-                    type: 'slider',
-                    label: '图标描边宽度',
-                    attr: ['toolbox',  'feature', 'restore', 'iconStyle', 'borderWidth'],
-                    defaultValue: 1,
-                    range: [0, 10],
-                  },
-                  {
-                    type: 'select',
-                    label: '图标描边类型',
-                    attr: ['toolbox',  'feature', 'restore', 'iconStyle', 'borderType'],
-                    defaultValue: 'solid',
-                    options: [
-                      'solid',
-                      'dashed',
-                      'dotted',
-                    ],
                   },
                 ],
               },
@@ -202,30 +144,6 @@ export default [
                     label: '颜色',
                     attr: ['toolbox',  'feature', 'dataView', 'iconStyle', 'color'],
                   },
-                  {
-                    type: 'colorSelect',
-                    label: '图标描边颜色',
-                    attr: ['toolbox',  'feature', 'dataView', 'iconStyle', 'borderColor'],
-                    defaultValue: '#666',
-                  },
-                  {
-                    type: 'slider',
-                    label: '图标描边宽度',
-                    attr: ['toolbox',  'feature', 'dataView', 'iconStyle', 'borderWidth'],
-                    defaultValue: 1,
-                    range: [0, 10],
-                  },
-                  {
-                    type: 'select',
-                    label: '图标描边类型',
-                    attr: ['toolbox',  'feature', 'dataView', 'iconStyle', 'borderType'],
-                    defaultValue: 'solid',
-                    options: [
-                      'solid',
-                      'dashed',
-                      'dotted',
-                    ],
-                  },
                 ],
               },
               {
@@ -233,24 +151,6 @@ export default [
                 type: 'switch',
                 defaultValue: false,
                 attr: ['toolbox', 'feature' ,'dataView', 'readOnly'],
-              },
-              {
-                type: 'colorSelect',
-                label: '数据视图浮层背景色',
-                attr: ['toolbox',  'feature', 'dataView', 'backgroundColor'],
-                defaultValue: '#fff',
-              },
-              {
-                type: 'colorSelect',
-                label: '数据视图浮层文本输入区背景色',
-                attr: ['toolbox',  'feature', 'dataView', 'textareaColor'],
-                defaultValue: '#fff',
-              },
-              {
-                type: 'colorSelect',
-                label: '数据视图浮层文本输入区边框颜色',
-                attr: ['toolbox',  'feature', 'dataView', 'textareaBorderColor'],
-                defaultValue: '#333',
               },
               {
                 type: 'colorSelect',
@@ -294,30 +194,6 @@ export default [
                     type: 'colorSelect',
                     label: '颜色',
                     attr: ['toolbox',  'feature', 'dataZoom', 'iconStyle', 'color'],
-                  },
-                  {
-                    type: 'colorSelect',
-                    label: '图标描边颜色',
-                    attr: ['toolbox', 'feature',  'dataZoom', 'iconStyle', 'borderColor'],
-                    defaultValue: '#666',
-                  },
-                  {
-                    type: 'slider',
-                    label: '图标描边宽度',
-                    attr: ['toolbox',  'feature', 'dataZoom', 'iconStyle', 'borderWidth'],
-                    defaultValue: 1,
-                    range: [0, 10],
-                  },
-                  {
-                    type: 'select',
-                    label: '图标描边类型',
-                    attr: ['toolbox',  'feature', 'dataZoom', 'iconStyle', 'borderType'],
-                    defaultValue: 'solid',
-                    options: [
-                      'solid',
-                      'dashed',
-                      'dotted',
-                    ],
                   },
                 ],
               },
@@ -382,30 +258,6 @@ export default [
                     type: 'colorSelect',
                     label: '颜色',
                     attr: ['toolbox',  'feature', 'magicType', 'iconStyle', 'color'],
-                  },
-                  {
-                    type: 'colorSelect',
-                    label: '图标描边颜色',
-                    attr: ['toolbox', 'feature',  'magicType', 'iconStyle', 'borderColor'],
-                    defaultValue: '#666',
-                  },
-                  {
-                    type: 'slider',
-                    label: '图标描边宽度',
-                    attr: ['toolbox',  'feature', 'magicType', 'iconStyle', 'borderWidth'],
-                    defaultValue: 1,
-                    range: [0, 10],
-                  },
-                  {
-                    type: 'select',
-                    label: '图标描边类型',
-                    attr: ['toolbox',  'feature', 'magicType', 'iconStyle', 'borderType'],
-                    defaultValue: 'solid',
-                    options: [
-                      'solid',
-                      'dashed',
-                      'dotted',
-                    ],
                   },
                 ],
               },
