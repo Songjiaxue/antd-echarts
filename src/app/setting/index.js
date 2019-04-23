@@ -31,7 +31,7 @@ class Setting extends React.Component{
         height: options.containerHeight,
       });
     } else {
-      myChart.setOption(options);
+      myChart.setOption(options, true);
     }
     
   }

@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { Layout } from 'antd';
 import { Route, Switch } from "react-router-dom";
 import AppMenu from './menu';
-import Config from './config';
 import Setting from './setting';
+import Home from './home';
 import './index.scss';
 
 
@@ -26,7 +26,7 @@ class AppContent extends Component {
           >
             <Content>
               <Switch>
-                <Route path="/config" component={Config} />
+                <Route exact path="/" component={Home} />
                 <Route path="/setting" component={Setting} />
               </Switch>
             </Content>

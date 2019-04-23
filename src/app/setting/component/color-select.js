@@ -6,14 +6,21 @@ class ColorSelect extends React.Component{
     super(props);
     this.state = {
       show: false,
+      value: props.item.defaultValue || '',
     };
   }
+  shouldComponentUpdate(nextProps,nextState){
+    if(nextState.show === this.state.show){
+      return false
+    }
+    return true;
+  }
   render () {
-    const { show } = this.state;
-    const { title, desc } = this.props;
+    const { show, value } = this.state;
+    const { item } = this.props;
     return (
       <div className="group-item">
-        <span className="label">{title}：</span>
+        <span className="label">{item.label}：</span>
         <span 
           className="color-block"
           onClick={() => {
@@ -21,19 +28,28 @@ class ColorSelect extends React.Component{
               show: !show,
             });
           }}
+          style={{
+            background: value,
+          }}
         />
+        <span>{value}</span>
         {
           show && (
             <SketchPicker 
               onChange={(e) => {
                 const { onChange } = this.props;
-                onChange(e);
+                this.setState({
+                  value: `rgba(${e.rgb.r}, ${e.rgb.g}, ${e.rgb.b}, ${e.rgb.a})`,
+                }, () => {
+                  const { value } = this.state;
+                  onChange(value);
+                });
               }}
             /> 
           )
         }
         {
-          desc && desc.map((e, r) => <p key={r}>{e}</p>)
+          item.desc && item.desc.map((e, r) => <p key={r}>{e}</p>)
         }
       </div>
     );

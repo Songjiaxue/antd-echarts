@@ -88,10 +88,10 @@ class ChangeItem extends React.Component{
           return (
             <ColorSelect 
               onChange={(e) => {
-                this.updateRes(r, v.attr, e.hex);
+                this.updateRes(r, v.attr, e);
               }}
               key={i}
-              title={v.label}
+              item={v}
             />
           );
         case 'select':
@@ -103,22 +103,24 @@ class ChangeItem extends React.Component{
               <span className="label">{v.label}：</span>
               <Select 
                 onChange={(e) => {
-                  const { data, panes } = this.state;
-                  const changeItem = [
-                    ...data.changeItem.filter(u => !u.isChange),
-                    ...v.onChange ? v.onChange(e).map(q => Object.assign({}, q, { isChange: true,})) : [],
-                  ];
-                  const p = panes.map(i => {
-                    if (i.key === r) {
-                      return Object.assign({}, i, {
-                        content: this.renderContent(r, changeItem),
-                      });
-                    }
-                    return i;
-                  });
-                  this.setState({
-                    panes: p
-                  });
+                  if (v.onChange) {
+                    const { data, panes } = this.state;
+                    const changeItem = [
+                      ...data.changeItem.filter(u => !u.isChange),
+                      ...v.onChange(e).map(q => Object.assign({}, q, { isChange: true,})),
+                    ];
+                    const p = panes.map(i => {
+                      if (i.key === r) {
+                        return Object.assign({}, i, {
+                          content: this.renderContent(r, changeItem),
+                        });
+                      }
+                      return i;
+                    });
+                    this.setState({
+                      panes: p
+                    });
+                  }
                   this.updateRes(r, v.attr, e);
                 }}
                 placeholder="请选择"

@@ -14,11 +14,11 @@ export default [
   {
     type: 'line',
     name: '折线图',
-    demo: [
+    demo: [ // 各个echarts图的配置项
       {
-        title: 'Basic Line Chart',
-        url: require('../../assets/line/line-simple.png'),
-        options: {
+        title: 'Basic Line Chart', // 标题
+        url: require('../../assets/image/line/line-simple.png'), // demo图
+        options: { // 默认的echrts配置属性
           xAxis: {
               type: 'category',
               data: [
@@ -74,7 +74,7 @@ export default [
       },  
       {
         title: 'Basic Area Chart',
-        url: require('../../assets/line/area-basic.png'),
+        url: require('../../assets/image/line/area-basic.png'),
         options: {
           xAxis: {
               type: 'category',
@@ -93,7 +93,7 @@ export default [
       },
       {
         title: 'Smoothed Line Chart',
-        url: require('../../assets/line/line-smooth.png'),
+        url: require('../../assets/image/line/line-smooth.png'),
         options:  {
           xAxis: {
               type: 'category',
@@ -111,7 +111,7 @@ export default [
       },
       {
         title: 'Stacked Area Chart',
-        url: require('../../assets/line/area-stack.png'),
+        url: require('../../assets/image/line/area-stack.png'),
         options: {
           title: {
               text: '堆叠区域图'
@@ -139,18 +139,14 @@ export default [
               bottom: '3%',
               containLabel: true
           },
-          xAxis : [
-              {
-                  type : 'category',
-                  boundaryGap : false,
-                  data : ['周一','周二','周三','周四','周五','周六','周日']
-              }
-          ],
-          yAxis : [
-              {
-                  type : 'value'
-              }
-          ],
+          xAxis: {
+            type : 'category',
+            boundaryGap : false,
+            data : ['周一','周二','周三','周四','周五','周六','周日']
+        },
+          yAxis: {
+            type : 'value'
+        },
           series : [
               {
                   name:'邮件营销',
@@ -198,7 +194,7 @@ export default [
       },
       {
         title: 'Stacked Line Chart',
-        url:  require('../../assets/line/line-stack.png'),
+        url:  require('../../assets/image/line/line-stack.png'),
         options:  {
           title: {
               text: '折线图堆叠'
@@ -264,7 +260,7 @@ export default [
       },
       {
         title: 'Large Scale Area Chart',
-        url: require('../../assets/line/area-simple.png'),
+        url: require('../../assets/image/line/area-simple.png'),
         options: {
           tooltip: {
               trigger: 'axis',

@@ -18,17 +18,19 @@ class RenderGroup extends React.Component{
       show: new Array(props.config.length).fill(false),
     }
   }
-  
+  // 属性变化， echrts重新渲染
   renderEcharts = (key, data) => {
     const { render, store } = this.props;
     store.updateCurrentOptions(key, data);
     render();
   }
+  // 容器大小变化，重新渲染echarts
   resizeEcharts = (key, data) => {
     const { render, store } = this.props;
     store.updateCurrentOptions(key, data);
     render(true);
   }
+  // 渲染属性表单
   renderItem = (t) => {
     const { store: { current, } } = this.props;
     return t.map((v, i) => {
@@ -53,11 +55,10 @@ class RenderGroup extends React.Component{
           return (
             <ColorSelect 
               onChange={(e) => {
-                this.renderEcharts(v.attr, e.hex);
+                this.renderEcharts(v.attr, e);
               }}
               key={i}
-              title={v.label}
-              desc={v.desc}
+              item={v}
             />
           );
         case 'select':
@@ -122,7 +123,7 @@ class RenderGroup extends React.Component{
               }
             </div>
           );
-        case 'add':
+        case 'add': // 属性为数组
           return (
             <div
               className="group-item"
@@ -165,7 +166,7 @@ class RenderGroup extends React.Component{
         <Collapse key={i}>
           <Panel
             header={v.title}
-            extra={v.type === 'change' && (
+            extra={v.type === 'change' && ( // 属性为数组
               <span 
                 className="add-item"
                 onClick={() => {

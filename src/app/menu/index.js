@@ -12,7 +12,7 @@ class AppMenu extends React.Component{
   clickMenuItem = (item) => {
     const { store, history } = this.props;
     store.updateType(item.key);
-    history.push('/config');
+    history.push('/');
   }
   render () {
     const { store } = this.props;

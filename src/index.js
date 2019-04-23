@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'mobx-react';
 import { HashRouter as Router } from 'react-router-dom';
-import App from './App';
+import App from './app/index';
 import TypeStore from './store';
 import './index.scss';
 

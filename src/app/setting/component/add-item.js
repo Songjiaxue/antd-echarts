@@ -49,10 +49,10 @@ class AddItem extends React.Component{
           return (
             <ColorSelect 
               onChange={(e) => {
-                this.updateRes(r, v.attr, e.hex);
+                this.updateRes(r, v.attr, e);
               }}
               key={i}
-              title={v.label}
+              item={v}
             />
           );
         case 'select':
