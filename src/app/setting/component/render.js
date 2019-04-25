@@ -70,6 +70,7 @@ class RenderGroup extends React.Component{
               <span className="label">{v.label}：</span>
               <Select 
                 onChange={(e) => {
+                  console.log(e);
                   this.renderEcharts(v.attr, e);
                 }}
                 placeholder="请选择"
@@ -77,7 +78,13 @@ class RenderGroup extends React.Component{
                 {...v.otherParams}
               >
                 {
-                  v.options.map(y => <Select.Option key={y}>{y}</Select.Option>)
+                  v.options.map(y => {
+                    return (
+                      typeof(y) === 'string' 
+                        ? <Select.Option key={y} value={y}>{y}</Select.Option>
+                        : <Select.Option key={y.value} value={y.value}>{y.label}</Select.Option>
+                    );
+                  })
                 }
               </Select>
             </div>
