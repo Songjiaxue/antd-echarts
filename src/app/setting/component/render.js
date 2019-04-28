@@ -34,7 +34,8 @@ class RenderGroup extends React.Component{
   renderItem = (t) => {
     const { store: { current, } } = this.props;
     return t.map((v, i) => {
-      const defaultValue = _.get(toJS(current.options), v.attr, v.defaultValue);
+      const dValue = _.get(toJS(current.options), v.attr, v.defaultValue);
+      const defaultValue = v.formatValue ? v.formatValue(dValue) : dValue;
       switch (v.type) {
         case 'switch':
           return (
@@ -49,6 +50,9 @@ class RenderGroup extends React.Component{
                 }}
                 defaultChecked={defaultValue}
               />
+              {
+                v.desc && v.desc.map((e, r) => <p key={r}>{e}</p>)
+              }
             </div>
           );
         case 'colorSelect':
@@ -70,8 +74,8 @@ class RenderGroup extends React.Component{
               <span className="label">{v.label}：</span>
               <Select 
                 onChange={(e) => {
-                  console.log(e);
-                  this.renderEcharts(v.attr, e);
+                  const value = v.format ? v.format(e) : e;
+                  this.renderEcharts(v.attr, value);
                 }}
                 placeholder="请选择"
                 defaultValue={defaultValue}
@@ -87,6 +91,9 @@ class RenderGroup extends React.Component{
                   })
                 }
               </Select>
+              {
+                v.desc && v.desc.map((e, r) => <p key={r}>{e}</p>)
+              }
             </div>
           );
         case 'slider':

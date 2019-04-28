@@ -11,6 +11,7 @@ import toolbox from './config/toolbox';
 import series from './config/series/index';
 import dataZoom from './config/dataZoom/index';
 import legend from './config/legend';
+import radar from './config/radar';
 
 @inject('store')
 @observer
@@ -32,6 +33,7 @@ class SettingCommon extends React.Component{
             ...tooltip,
             ...toolbox,
             ...series,
+            ...radar
           ]}
         />
       </div>

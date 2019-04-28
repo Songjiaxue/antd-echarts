@@ -1,3 +1,5 @@
+import WZK from './common/wenzikuai';
+import TX from './common/tuxing';
 export default [
   {
     title: '直角坐标系 grid 中的 x 轴',
@@ -49,199 +51,10 @@ export default [
       {
         label: '名称样式',
         item: [
-          {
-            type: 'colorSelect',
-            label: '颜色',
-            attr: ['xAxis', 'nameTextStyle', 'color'],
-            defaultValue: '#333'
-          },
-          {
-            type: 'select',
-            label: '字体风格',
-            attr: ['xAxis', 'nameTextStyle', 'fontStyle'],
-            defaultValue: 'normal',
-            options: [
-              'normal',
-              'italic',
-              'oblique',
-            ],
-          },
-          {
-            type: 'select',
-            label: '字体粗细',
-            attr: ['xAxis', 'nameTextStyle', 'fontWeight'],
-            defaultValue: 'normal',
-            options: [
-              'normal',
-              'bold',
-              'bolder',
-              'lighter',
-            ],
-          },
-          {
-            type: 'slider',
-            label: '字体大小',
-            attr: ['xAxis', 'nameTextStyle', 'fontSize'],
-            defaultValue: 18,
-            range: [12, 72],
-          },
-          {
-            type: 'slider',
-            label: '行高',
-            attr: ['xAxis', 'nameTextStyle', 'lineHeight'],
-            range: [12, 72],
-          },
-          {
-            type: 'select',
-            label: '水平对齐',
-            attr: ['xAxis', 'nameTextStyle', 'align'],
-            defaultValue: 'auto',
-            options: [
-              'auto',
-              'left',
-              'right',
-              'center',
-            ],
-          },
-          {
-            type: 'select',
-            label: '垂直对齐',
-            attr: ['xAxis', 'nameTextStyle', 'verticalAlign'],
-            defaultValue: 'auto',
-            options: [
-              'auto',
-              'top',
-              'bottom',
-              'middle',
-            ],
-          },
-          {
-            type: 'colorSelect',
-            label: '文字块背景色',
-            attr: ['xAxis', 'nameTextStyle', 'backgroundColor'],
-            defaultValue: 'transparent',
-          },
-          {
-            type: 'colorSelect',
-            label: '文字块边框颜色',
-            attr: ['xAxis', 'nameTextStyle', 'borderColor'],
-            defaultValue: 'transparent',
-          },
-          {
-            type: 'slider',
-            label: '文字块边框宽度',
-            attr: ['xAxis', 'nameTextStyle', 'borderWidth'],
-            range: [0, 10],
-            defaultValue: 0,
-          },
-          {
-            type: 'input',
-            label: '文字块的圆角',
-            attr: ['xAxis', 'nameTextStyle', 'borderRidus'],
-            defaultValue: 0,
-            format: (e) => {
-              return e.indexOf(',') > -1 ?
-                e.split(',').map(v => isNaN(parseFloat(v.trim()) ? 0 : v.trim()))
-                  : isNaN(parseFloat(e.trim())) ? 0 : e.trim()
-            },
-            desc: [
-              "设置四个角的圆角大小为 5 => 5",
-              "分别设置四个方向的圆角大小(上右下左) => 5,10,5,10",
-            ],
-          },
-          {
-            type: 'input',
-            label: '图例内边距',
-            attr: ['legend', 'nameTextStyle', 'padding'],
-            defaultValue: 5,
-            format: (e) => {
-              return e.indexOf(',') > -1 ?
-                e.split(',').map(v => isNaN(parseFloat(v.trim()) ? 0 : v.trim()))
-                  : isNaN(parseFloat(e.trim())) ? 0 : e.trim()
-            },
-            desc: [
-              "设置内边距为 5 => 5",
-              "设置上下的内边距为 5，左右的内边距为 10 => 5,10",
-              "分别设置四个方向的内边距(上右下左) => 5,10,5,10",
-            ],
-          },
-          {
-            type: 'slider',
-            label: '图形阴影模糊大小',
-            attr: ['legend', 'nameTextStyle', 'shadowBlur'],
-            range: [0, 100],
-          },
-          {
-            type: 'colorSelect',
-            label: '图形阴影颜色',
-            attr: ['legend','nameTextStyle', 'shadowColor'],
-          },
-          {
-            type: 'slider',
-            label: '阴影水平方向上的偏移距离',
-            attr: ['legend', 'nameTextStyle', 'shadowOffsetX'],
-            range: [0, 10],
-            defaultValue: 0,
-          },
-          {
-            type: 'slider',
-            label: '阴影垂直方向上的偏移距离',
-            attr: ['legend', 'nameTextStyle', 'shadowOffsetY'],
-            range: [0, 10],
-            defaultValue: 0,
-          },
-          {
-            type: 'slider',
-            label: '文字块宽度',
-            attr: ['legend', 'nameTextStyle', 'width'],
-            range: [0, 1000],
-          },
-          {
-            type: 'slider',
-            label: '文字块高度',
-            attr: ['legend', 'nameTextStyle', 'height'],
-            range: [0, 1000],
-          },
-          {
-            type: 'colorSelect',
-            label: '文字本身的描边颜色',
-            attr: ['legend', 'nameTextStyle', 'textBorderColor'],
-            defaultValue: 'transparent'
-          },
-          {
-            type: 'slider',
-            label: '文字本身的描边宽度',
-            attr: ['legend', 'nameTextStyle', 'textBorderWidth'],
-            range: [0, 10],
-            defaultValue: 0,
-          },
-          {
-            type: 'colorSelect',
-            label: '文字本身的阴影颜色',
-            attr: ['legend', 'nameTextStyle', 'textShadowColor'],
-            defaultValue: 'transparent'
-          },
-          {
-            type: 'slider',
-            label: '文字本身的阴影长度',
-            attr: ['legend', 'nameTextStyle', 'textShadowBlur'],
-            range: [0, 100],
-            defaultValue: 0,
-          },
-          {
-            type: 'slider',
-            label: '文字本身的阴影 X 偏移',
-            attr: ['legend', 'nameTextStyle', 'textShadowOffsetX'],
-            range: [0, 100],
-            defaultValue: 0,
-          },
-          {
-            type: 'slider',
-            label: '文字本身的阴影 Y 偏移',
-            attr: ['legend', 'nameTextStyle', 'textShadowOffsetY'],
-            range: [0, 100],
-            defaultValue: 0,
-          },
+          ...WZK(['xAxis', 'nameTextStyle'], true, {
+            color: undefined,
+          }),
+          ...TX(['legend', 'nameTextStyle'], false)
         ],
       },
       {
@@ -423,41 +236,7 @@ export default [
                   'dotted',
                 ],
               },
-              {
-                type: 'slider',
-                label: '图形阴影的模糊大小',
-                attr: ['xAxis', 'axisLine', 'lineStyle', 'shadowBlur'],
-                range: [0, 100],
-                defaultValue: 0,
-              },
-              {
-                type: 'colorSelect',
-                label: '阴影颜色',
-                attr: ['xAxis', 'axisLine', 'lineStyle', 'shadowColor'],
-                defaultValue: 'transparent',
-              },
-              {
-                type: 'slider',
-                label: '阴影水平方向上的偏移距离',
-                attr: ['xAxis', 'axisLine', 'lineStyle', 'shadowOffsetX'],
-                range: [0, 100],
-                defaultValue: 0,
-              },
-              {
-                type: 'slider',
-                label: '阴影垂直方向上的偏移距离',
-                attr: ['xAxis', 'axisLine', 'lineStyle', 'shadowOffsetY'],
-                range: [0, 100],
-                defaultValue: 0,
-              },
-              {
-                type: 'slider',
-                label: '图形透明度',
-                attr: ['xAxis', 'axisLine', 'lineStyle', 'opacity'],
-                defaultValue: 1,
-                range: [0, 1],
-                step: 0.1,
-              },
+              ...TX(['xAxis', 'axisLine', 'lineStyle'], true),
             ],
           },
         ],
@@ -471,13 +250,7 @@ export default [
             defaultValue: true,
             attr: ['xAxis', 'axisTick', 'show'],
           },
-          {
-            type: 'slider',
-            label: '坐标轴刻度的长度',
-            attr: ['title', 'axisTick', 'length'],
-            defaultValue: 5,
-            range: [0, 10],
-          },
+          
           {
             label: '刻度线和标签对齐',
             type: 'switch',
@@ -488,13 +261,31 @@ export default [
             ],
           },
           {
+            type: 'slider',
+            label: '坐标轴刻度的显示间隔',
+            attr: ['xAxis', 'axisTick', 'interval'],
+            range: [0, 10],
+          },
+          {
+            label: '坐标轴刻度是否朝内',
+            type: 'switch',
+            defaultValue: false,
+            attr: ['xAxis', 'axisTick', 'inside'],
+          },
+          {
+            type: 'slider',
+            label: '坐标轴刻度的长度',
+            attr: ['xAxis', 'axisTick', 'length'],
+            defaultValue: 5,
+            range: [0, 10],
+          },
+          {
             label: '坐标轴刻度线样式',
             item: [
               {
                 type: 'colorSelect',
                 label: '颜色',
                 attr: ['xAxis', 'axisTick', 'lineStyle', 'color'],
-                defaultValue: '#333'
               },
               {
                 type: 'slider',
@@ -514,14 +305,7 @@ export default [
                   'dotted',
                 ],
               },
-              {
-                type: 'slider',
-                label: '图形透明度',
-                attr: ['xAxis', 'axisTick', 'lineStyle', 'opacity'],
-                defaultValue: 1,
-                range: [0, 1],
-                step: 0.1,
-              },
+              ...TX(['xAxis', 'axisTick', 'lineStyle'], true),
             ],
           },
         ],
@@ -537,6 +321,18 @@ export default [
           },
           {
             type: 'slider',
+            label: '坐标轴刻度标签的显示间隔',
+            attr: ['xAxis', 'axisLabel', 'interval'],
+            range: [0, 10],
+          },
+          {
+            label: '刻度标签是否朝内',
+            type: 'switch',
+            defaultValue: false,
+            attr: ['xAxis', 'axisLabel', 'inside'],
+          },
+          {
+            type: 'slider',
             label: '刻度标签旋转的角度',
             attr: ['xAxis', 'axisLabel', 'rotate'],
             range: [0, 360],
@@ -548,6 +344,45 @@ export default [
             defaultValue: 8,
             range: [0, 100],
           },
+          { // todo 回调函数
+            label: '刻度标签的内容格式器',
+            type: 'input',
+            attr: ['xAxis', 'axisLabel', 'formatter'],
+            desc: [
+              "当前标签 => {value}",
+            ],
+          },
+          {
+            type: 'select',
+            label: '显示最小 tick 的 label',
+            attr: ['xAxis', 'axisLabel', 'showMinLabel'],
+            defaultValue: '-1',
+            formatValue: (e) => {
+              return e === null ? '-1' :
+                e === false ? '0' : e === true ? '1' : e;
+            },
+            options: [
+              {
+                label: 'null',
+                value: '-1',
+              },
+              {
+                label: 'false',
+                value: '0',
+              },
+              {
+                label: 'true',
+                value: '1',
+              },
+            ],
+            format: (e) => {
+              return e === '-1' ? null :
+                e === '0' ? false : true;
+            },
+            desc:[
+              "默认自动判定（即如果标签重叠，不会显示最小 tick 的 label）"
+            ],
+          },
           {
             type: 'colorSelect',
             label: '刻度标签文字的颜色',
@@ -555,40 +390,36 @@ export default [
           },
           {
             type: 'select',
-            label: '字体风格',
-            attr: ['xAxis', 'axisLabel', 'fontStyle'],
-            defaultValue: 'normal',
+            label: '显示最大 tick 的 label',
+            attr: ['xAxis', 'axisLabel', 'showMaxLabel'],
+            defaultValue: '-1',
+            formatValue: (e) => {
+              return e === null ? '-1' :
+                e === false ? '0' : e === true ? '1' : e;
+            },
             options: [
-              'normal',
-              'italic',
-              'oblique',
+              {
+                label: 'null',
+                value: '-1',
+              },
+              {
+                label: 'false',
+                value: '0',
+              },
+              {
+                label: 'true',
+                value: '1',
+              },
+            ],
+            format: (e) => {
+              return e === '-1' ? null :
+                e === '0' ? false : true;
+            },
+            desc:[
+              "默认自动判定（即如果标签重叠，不会显示最大 tick 的 label）"
             ],
           },
-          {
-            type: 'select',
-            label: '字体粗细',
-            attr: ['xAxis', 'axisLabel', 'fontWeight'],
-            defaultValue: 'normal',
-            options: [
-              'normal',
-              'bold',
-              'bolder',
-              'lighter',
-            ],
-          },
-          {
-            type: 'slider',
-            label: '字体大小',
-            attr: ['xAxis', 'axisLabel', 'fontSize'],
-            defaultValue: 12,
-            range: [12, 72],
-          },
-          {
-            type: 'slider',
-            label: '行高',
-            attr: ['xAxis', 'axisLabel', 'lineHeight'],
-            range: [12, 72],
-          },
+          ...WZK(['xAxis', 'axisLabel'], true),
         ],
       },
       {
@@ -601,13 +432,28 @@ export default [
             attr: ['xAxis', 'splitLine', 'show'],
           },
           {
+            type: 'slider',
+            label: '坐标轴分隔线的显示间隔',
+            attr: ['xAxis', 'splitLine', 'interval'],
+            range: [0, 10],
+          },
+          {
             label: '坐标轴线样式',
             item: [
               {
-                type: 'colorSelect',
+                type: 'input',
                 label: '颜色',
                 attr: ['xAxis', 'splitLine', 'lineStyle', 'color'],
-                defaultValue: '#333'
+                defaultValue: ['#ccc'],
+                formatValue: (e) => {
+                  return e.length > 0 ? e.join(';') : e;
+                },
+                format: (e) => {
+                  return e.split(',').map(v => v.trim());
+                },
+                desc: [
+                  "分隔线会按颜色的顺序依次循环设置颜色, 用分号隔开"
+                ],
               },
               {
                 type: 'slider',
@@ -627,14 +473,45 @@ export default [
                   'dotted',
                 ],
               },
+              ...TX(['xAxis', 'splitLine', 'lineStyle'], true),
+            ],
+          },
+        ],
+      },
+      {
+        label: '坐标轴在 grid 区域中的分隔区域',
+        item: [
+          {
+            label: '显示',
+            type: 'switch',
+            defaultValue: false,
+            attr: ['xAxis', 'splitArea', 'show'],
+          },
+          {
+            type: 'slider',
+            label: '坐标轴分隔线的显示间隔',
+            attr: ['xAxis', 'splitArea', 'interval'],
+            range: [0, 10],
+          },
+          {
+            label: '分隔区域的样式设置',
+            item: [
               {
-                type: 'slider',
-                label: '图形透明度',
-                attr: ['xAxis', 'splitLine', 'lineStyle', 'opacity'],
-                defaultValue: 1,
-                range: [0, 1],
-                step: 0.1,
+                type: 'input',
+                label: '颜色',
+                attr: ['xAxis', 'splitArea', 'areaStyle', 'color'],
+                defaultValue: ['rgba(250,250,250,0.3)','rgba(200,200,200,0.3)'],
+                formatValue: (e) => {
+                  return e.length > 0 ? e.join(';') : e;
+                },
+                format: (e) => {
+                  return e.split(',').map(v => v.trim());
+                },
+                desc: [
+                  "分隔区会按颜色的顺序依次循环设置颜色, 用分号隔开"
+                ],
               },
+              ...TX(['xAxis', 'splitArea', 'areaStyle'], true),
             ],
           },
         ],
@@ -657,57 +534,201 @@ export default [
           {
             label: '类目标签的文字样式',
             item: [
-              {
-                type: 'colorSelect',
-                label: '颜色',
-                attr: ['textStyle', 'color'],
-                key: 'color',
-                defaultValue: '#333'
-              },
-              {
-                type: 'select',
-                label: '字体风格',
-                attr: ['textStyle', 'fontStyle'],
-                defaultValue: 'normal',
-                key: 'fontStyle',
-                options: [
-                  'normal',
-                  'italic',
-                  'oblique',
-                ],
-              },
-              {
-                type: 'select',
-                label: '字体粗细',
-                attr: ['textStyle', 'fontWeight'],
-                defaultValue: 'normal',
-                key: 'fontWeight',
-                options: [
-                  'normal',
-                  'bold',
-                  'bolder',
-                  'lighter',
-                ],
-              },
-              {
-                type: 'slider',
-                label: '字体大小',
-                attr: ['textStyle', 'fontSize'],
-                defaultValue: 12,
-                range: [12, 72],
-                key: 'fontSize',
-              },
-              {
-                type: 'slider',
-                label: '行高',
-                attr: ['textStyle', 'lineHeight'],
-                range: [12, 72],
-                key: 'lineHeight',
-              },
+              ...WZK(['textStyle'], true)
             ],
           },
         ],
       },
+      {
+        label: 'axis指示器',
+        item: [
+          {
+            label: '显示',
+            type: 'switch',
+            defaultValue: false,
+            attr: ['xAxis', 'axisPointer', 'show'],
+          },
+          {
+            type: 'select',
+            label: '指示器类型',
+            attr: ['xAxis', 'axisPointer', 'type'],
+            defaultValue: 'line',
+            options: [
+              {
+                label: '直线指示器',
+                value: 'line',
+              },
+              {
+                label: '阴影指示器',
+                value: 'shadow',
+              },
+              {
+                label: '无指示器',
+                value: 'none',
+              },
+            ],
+          },
+          {
+            label: '坐标轴指示器是否自动吸附到点上',
+            type: 'switch',
+            defaultValue: false,
+            attr: ['xAxis', 'axisPointer', 'show'],
+            desc: [
+              "默认自动判断"
+            ],
+          },
+          {
+            label: '坐标轴指示器的文本标签',
+            item: [
+              {
+                label: '显示',
+                type: 'switch',
+                defaultValue: false,
+                attr: ['xAxis', 'axisPointer', 'label', 'show'],
+                desc: [
+                  "如果 tooltip.axisPointer.type 设置为 'cross' 则默认显示标签，否则默认不显示"
+                ],
+              },
+              {
+                label: '文本标签中数值的小数点精度',
+                type: 'slider',
+                attr: ['xAxis', 'axisPointer', 'label', 'precision'],
+                range: [0, 10],
+              },
+              {
+                // todo 回调函数
+                label: '文本标签文字的格式化器',
+                type: 'input',
+                attr: ['xAxis', 'axisPointer', 'label', 'formatter'],
+                desc: [
+                  "{value} 会被自动替换为轴的值 => some text {value} some text"
+                ],
+              },
+              {
+                type: 'slider',
+                label: 'label 距离轴的距离',
+                attr: ['xAxis', 'axisPointer', 'label', 'margin'],
+                defaultValue: 3,
+                range: [0, 100],
+              },
+              ...WZK(['xAxis', 'axisPointer', 'label'], true, {
+                color: '#fff',
+                padding: [5, 7, 5, 7],
+                shadowBlur: 3,
+              }),
+            ],
+          },
+          {
+            label: "线条样式(axisPointer.type === 'line')",
+            item: [
+              {
+                type: 'colorSelect',
+                label: '线的颜色',
+                attr: ['xAxis', 'axisPointer', 'lineStyle', 'color'],
+                defaultValue: '#555'
+              },
+              {
+                type: 'slider',
+                label: '线宽',
+                attr: ['xAxis', 'axisPointer', 'lineStyle', 'width'],
+                defaultValue: 1,
+                range: [1, 20],
+              },
+              {
+                type: 'select',
+                label: '线的类型',
+                attr: ['xAxis', 'axisPointer', 'lineStyle', 'type'],
+                defaultValue: 'solid',
+                options: [
+                  'solid',
+                  'dashed',
+                  'dotted',
+                ],
+              },
+              ...TX(['xAxis', 'axisPointer', 'lineStyle'], true),
+            ],
+          },
+          {
+            label: "填充样式(axisPointer.type === 'shadow')",
+            item: [
+              {
+                type: 'colorSelect',
+                label: '线的颜色',
+                attr: ['xAxis', 'axisPointer', 'lineStyle', 'color'],
+                defaultValue:  'rgba(150,150,150,0.3)',
+              },
+              ...TX(['xAxis', 'axisPointer', 'shadowStyle'], true),
+            ],
+          },
+          {
+            type: 'switch',
+            label: '触发 tooltip',
+            defaultValue: true,
+            attr: ['xAxis', 'axisPointer', 'triggerTooltip'],
+          },
+          {
+            type: 'input',
+            label: '当前value',
+            defaultValue: true,
+            attr: ['xAxis', 'axisPointer', 'triggerTooltip'],
+            desc: [
+              "在使用 axisPointer.handle 时，可以设置此值进行初始值设定，从而决定 axisPointer 的初始位置"
+            ],
+          },
+          {
+            type: 'switch',
+            label: '当前的状态',
+            attr: ['xAxis', 'axisPointer', 'status'],
+            desc: [
+              "可取值为 'show' 和 'hide'"
+            ],
+          },
+          {
+            label: '拖拽手柄',
+            item: [
+              {
+                type: 'switch',
+                label: '显示手柄',
+                defaultValue: false,
+                attr: ['xAxis', 'axisPointer', 'handle', 'show'],
+              },
+              {
+                type: 'slider',
+                label: '手柄尺寸',
+                defaultValue: 45,
+                attr: ['xAxis', 'axisPointer', 'handle', 'size'],
+                range: [0, 100],
+              },
+              {
+                type: 'slider',
+                label: '手柄与轴的距离',
+                defaultValue: 50,
+                attr: ['xAxis', 'axisPointer', 'handle', 'margin'],
+                range: [0, 100],
+              },
+              {
+                type: 'colorSelect',
+                defaultValue: '#333',
+                label: '手柄颜色',
+                attr: ['xAxis', 'axisPointer', 'handle', 'color'],
+              },
+              {
+                type: 'slider',
+                label: '手柄拖拽时触发视图更新周期',
+                defaultValue: 40,
+                attr: ['xAxis', 'axisPointer', 'handle', 'throttle'],
+                range: [0, 1000],
+              },
+              ...TX(['xAxis', 'axisPointer', 'handle'], false, {
+                shadowBlur: 3,
+                shadowColor: '#aaa',
+                shadowOffsetX: 2,
+              })
+            ],
+          },
+        ],
+      },
+      
     ],
   },
 ];

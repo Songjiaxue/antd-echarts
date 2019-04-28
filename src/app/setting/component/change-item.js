@@ -67,7 +67,7 @@ class ChangeItem extends React.Component{
   }
   renderContent = (r, t) => {
     return t.map((v, i) => {
-      const defaultValue = v.defaultValue;
+      const defaultValue = v.formatValue ? v.formatValue(v.defaultValue) : v.defaultValue;
       switch (v.type) {
         case 'switch':
           return (
@@ -121,7 +121,8 @@ class ChangeItem extends React.Component{
                       panes: p
                     });
                   }
-                  this.updateRes(r, v.attr, e);
+                  const value = v.format ? v.format(e) : e;
+                  this.updateRes(r, v.attr, value);
                 }}
                 placeholder="请选择"
                 defaultValue={defaultValue}
