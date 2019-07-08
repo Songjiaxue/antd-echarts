@@ -1,3 +1,6 @@
+import TX from "../common/tuxing";
+import wenzikuai from "../common/wenzikuai";
+
 export default {
   'inside': [
     {
@@ -12,10 +15,22 @@ export default {
       attr: ['filterMode'],
       defaultValue: 'filter',
       options: [
-        'filter',
-        'weakFilter',
-        'empty',
-        'none',
+        {
+          label: '当前数据窗口外的数据，被 过滤掉',
+          value: 'filter'
+        },
+        {
+          label: '当前数据窗口外的数据，被 过滤掉',
+          value: 'weakFilter'
+        },
+        {
+          label: '当前数据窗口外的数据，被 设置为空',
+          value: 'weakFilter'
+        },
+        {
+          label: '不过滤数据',
+          value: 'none'
+        },
       ],
     },
     {
@@ -23,6 +38,9 @@ export default {
       label: '数据窗口范围的起始百分比',
       attr: [ 'start'],
       range: [0, 100],
+      formatValue: (e) => {
+        return e && e.indexOf('%') > -1 ? Number(e) : e;
+      },
       format: (e) => {
         return `${e}%`
       },
@@ -32,6 +50,9 @@ export default {
       label: '数据窗口范围的结束百分比',
       attr: [ 'end'],
       range: [0, 100],
+      formatValue: (e) => {
+        return e && e.indexOf('%') > -1 ? Number(e) : e;
+      },
       format: (e) => {
         return `${e}%`
       },
@@ -115,17 +136,107 @@ export default {
       ],
     },
     {
+      type: 'slider',
+      label: '设置触发视图刷新的频率',
+      attr: ['throttle'],
+      defaultValue: 100,
+      range: [0, 3000],
+      step: 100,
+    },
+    {
+      type: 'input',
+      label: '取值类型',
+      attr: ['rangeMode'],
+      render: (e) => {
+        return e.split(',');
+      },
+      desc: [
+        "'value', 'percent' => 表示 start 值取绝对数值，end 取百分比。",
+      ],
+    },
+    {
+      type: 'select',
+      label: '如何触发缩放',
+      attr: ['zoomOnMouseWheel',],
+      defaultValue: 'true',
+      options: [
+        {
+          label: '不按任何功能键, 鼠标滚轮能触发缩放',
+          value: 'true',
+        },
+        {
+          label: '鼠标滚轮不能触发缩放',
+          value: 'false',
+        },
+        {
+          label: '按住 shift 和鼠标滚轮能触发缩放',
+          value: 'shift',
+        },
+        {
+          label: '表示按住 ctrl 和鼠标滚轮能触发缩放',
+          value: 'ctrl',
+        },
+        {
+          label: '按住 alt 和鼠标滚轮能触发缩放',
+          value: 'alt',
+        },
+      ],
+      render: (e) => {
+        let params = e;
+        switch (e) {
+          case 'true':
+            params = true;
+            break;
+          case 'false':
+            params = false;
+            break;
+          default:
+            break;
+        }
+        return params;
+      }
+    },
+    {
       type: 'select',
       label: '触发数据窗口平移（鼠标移动）',
       attr: ['moveOnMouseMove',],
       defaultValue: 'true',
       options: [
-        'true',
-        'false',
-        'shift',
-        'ctrl',
-        'alt',
+        {
+          label: '不按任何功能键, 鼠标移动能触发数据窗口平移',
+          value: 'true',
+        },
+        {
+          label: '鼠标滚轮不能触发平移',
+          value: 'false',
+        },
+        {
+          label: '按住 shift 和鼠标移动能触发数据窗口平移',
+          value: 'shift',
+        },
+        {
+          label: '按住 ctrl 和鼠标移动能触发数据窗口平移',
+          value: 'ctrl',
+        },
+        {
+          label: '按住 alt 和鼠标移动能触发数据窗口平移',
+          value: 'alt',
+        },
       ],
+      render: (e) => {
+        let params = e;
+        switch (e) {
+          case 'true':
+            params = true;
+            break;
+          case 'false':
+            params = false;
+            break;
+          default:
+            break;
+        }
+        return params;
+      }
     },
     {
       type: 'select',
@@ -133,12 +244,41 @@ export default {
       attr: ['moveOnMouseWheel',],
       defaultValue: 'true',
       options: [
-        'true',
-        'false',
-        'shift',
-        'ctrl',
-        'alt',
+        {
+          label: '不按任何功能键, 鼠标滚轮能触发数据窗口平移',
+          value: 'true',
+        },
+        {
+          label: '鼠标滚轮不能触发数据窗口平移',
+          value: 'false',
+        },
+        {
+          label: '按住 shift 和鼠标滚轮能触发数据窗口平移',
+          value: 'shift',
+        },
+        {
+          label: '表示按住 ctrl 和鼠标滚轮能触发数据窗口平移',
+          value: 'ctrl',
+        },
+        {
+          label: '按住 alt 和鼠标滚轮能触发数据窗口平移',
+          value: 'alt',
+        },
       ],
+      render: (e) => {
+        let params = e;
+        switch (e) {
+          case 'true':
+            params = true;
+            break;
+          case 'false':
+            params = false;
+            break;
+          default:
+            break;
+        }
+        return params;
+      }
     },
     {
       label: '阻止 mousemove 事件的默认行为',
@@ -191,40 +331,7 @@ export default {
                 'dotted',
               ],
             },
-            {
-              type: 'slider',
-              label: '图形阴影模糊大小',
-              attr: ['dataBackground', 'lineStyle', 'shadowBlur'],
-              range: [0, 100],
-              defaultValue: 3,
-            },
-            {
-              type: 'colorSelect',
-              label: '图形阴影颜色',
-              attr: ['dataBackground', 'lineStyle', 'shadowColor'],
-              defaultValue: '#aaa',
-            },
-            {
-              type: 'slider',
-              label: '阴影水平方向上的偏移距离',
-              attr: ['dataBackground', 'lineStyle', 'shadowOffsetX'],
-              range: [0, 10],
-              defaultValue: 0,
-            },
-            {
-              type: 'slider',
-              label: '阴影垂直方向上的偏移距离',
-              attr: ['dataBackground', 'lineStyle', 'shadowOffsetY'],
-              range: [0, 10],
-              defaultValue: 0,
-            },
-            {
-              type: 'slider',
-              label: '图形透明度',
-              attr: ['dataBackground', 'lineStyle', 'opacity'],
-              range: [0, 1],
-              step: 0.1,
-            },
+            ...TX(['dataBackground', 'lineStyle'], true,),
           ],
         },
         {
@@ -236,40 +343,7 @@ export default {
               attr: ['dataBackground', 'areaStyle', 'color'],
               defaultValue: '#2f4554'
             },
-            {
-              type: 'slider',
-              label: '图形阴影模糊大小',
-              attr: ['dataBackground', 'areaStyle', 'shadowBlur'],
-              range: [0, 100],
-              defaultValue: 3,
-            },
-            {
-              type: 'colorSelect',
-              label: '图形阴影颜色',
-              attr: ['dataBackground', 'areaStyle', 'shadowColor'],
-              defaultValue: '#aaa',
-            },
-            {
-              type: 'slider',
-              label: '阴影水平方向上的偏移距离',
-              attr: ['dataBackground', 'areaStyle', 'shadowOffsetX'],
-              range: [0, 10],
-              defaultValue: 0,
-            },
-            {
-              type: 'slider',
-              label: '阴影垂直方向上的偏移距离',
-              attr: ['dataBackground', 'areaStyle', 'shadowOffsetY'],
-              range: [0, 10],
-              defaultValue: 0,
-            },
-            {
-              type: 'slider',
-              label: '图形透明度',
-              attr: ['dataBackground', 'areaStyle', 'opacity'],
-              range: [0, 1],
-              step: 0.1,
-            },
+            ...TX(['dataBackground', 'areaStyle'], true,),
           ],
         },
       ],
@@ -327,41 +401,24 @@ export default {
             'dotted',
           ],
         },
-        {
-          type: 'slider',
-          label: '图形阴影模糊大小',
-          attr: ['handleStyle', 'shadowBlur'],
-          range: [0, 100],
-          defaultValue: 3,
-        },
-        {
-          type: 'colorSelect',
-          label: '图形阴影颜色',
-          attr: ['handleStyle', 'shadowColor'],
-          defaultValue: '#aaa',
-        },
-        {
-          type: 'slider',
-          label: '阴影水平方向上的偏移距离',
-          attr: ['handleStyle', 'shadowOffsetX'],
-          range: [0, 10],
-          defaultValue: 0,
-        },
-        {
-          type: 'slider',
-          label: '阴影垂直方向上的偏移距离',
-          attr: ['handleStyle', 'shadowOffsetY'],
-          range: [0, 10],
-          defaultValue: 0,
-        },
-        {
-          type: 'slider',
-          label: '图形透明度',
-          attr: ['handleStyle', 'opacity'],
-          range: [0, 1],
-          step: 0.1
-        },
+        ...TX(['handleStyle'], true,),
         
+      ],
+    },
+    {
+      label: '显示label的小数精度',
+      type: 'input',
+      attr: ['labelPrecision'],
+      format: (e) => {
+        return Number(e);
+      },
+    },
+    {
+      label: '显示的label的格式化器',
+      type: 'input',
+      attr: ['labelFormatter'],
+      desc: [
+        "aaaa{value}bbbb => 其中{value}会被替换为实际的数值"
       ],
     },
     {
@@ -379,47 +436,20 @@ export default {
     {
       label: '文字样式',
       item: [
+        ...wenzikuai(['textStyle'], false, {
+          color: '#333',
+        }),
         {
-          type: 'colorSelect',
-          label: '文字颜色',
-          attr: ['textStyle', 'color'],
-          defaultValue: '#333'
-        },
-        {
-          type: 'select',
-          label: '文字字体的风格',
-          attr: ['textStyle', 'fontStyle'],
-          defaultValue: 'normal',
-          options: [
-            'normal',
-            'italic',
-            'oblique',
-          ],
-        },
-        {
-          type: 'select',
-          label: '文字字体粗细',
-          attr: ['textStyle', 'fontWeight'],
-          defaultValue: 'normal',
-          options: [
-            'normal',
-            'bold',
-            'bolder',
-            'lighter',
-          ],
+          type: 'slider',
+          label: '文字块宽度',
+          attr: ['textStyle', 'width'],
+          range: [0, 1000],
         },
         {
           type: 'slider',
-          label: '文字字体大小',
-          attr: ['textStyle', 'fontSize'],
-          defaultValue: 12,
-          range: [12, 72],
-        },
-        {
-          type: 'slider',
-          label: '行高',
-          attr: [ 'textStyle', 'lineHeight'],
-          range: [12, 72],
+          label: '文字块高度',
+          attr: ['textStyle', 'height'],
+          range: [0, 1000],
         },
       ],
     },
@@ -429,10 +459,22 @@ export default {
       attr: ['filterMode'],
       defaultValue: 'filter',
       options: [
-        'filter',
-        'weakFilter',
-        'empty',
-        'none',
+        {
+          label: '当前数据窗口外的数据，被 过滤掉',
+          value: 'filter'
+        },
+        {
+          label: '当前数据窗口外的数据，被 过滤掉',
+          value: 'weakFilter'
+        },
+        {
+          label: '当前数据窗口外的数据，被 设置为空',
+          value: 'weakFilter'
+        },
+        {
+          label: '不过滤数据',
+          value: 'none'
+        },
       ],
     },
     {
@@ -440,6 +482,9 @@ export default {
       label: '数据窗口范围的起始百分比',
       attr: [ 'start'],
       range: [0, 100],
+      formatValue: (e) => {
+        return e && e.indexOf('%') > -1 ? Number(e) : e;
+      },
       format: (e) => {
         return `${e}%`
       },
@@ -449,6 +494,9 @@ export default {
       label: '数据窗口范围的结束百分比',
       attr: [ 'end'],
       range: [0, 100],
+      formatValue: (e) => {
+        return e && e.indexOf('%') > -1 ? Number(e) : e;
+      },
       format: (e) => {
         return `${e}%`
       },
@@ -517,6 +565,38 @@ export default {
       type: 'switch',
       defaultValue: false,
       attr: ['zoomLock'],
+    },
+    {
+      type: 'select',
+      label: '触发缩放',
+      attr: ['zoomOnMouseWheel',],
+      defaultValue: 'true',
+      options: [
+        'true',
+        'false',
+        'shift',
+        'ctrl',
+        'alt',
+      ],
+    },
+    {
+      type: 'slider',
+      label: '设置触发视图刷新的频率',
+      attr: ['throttle'],
+      defaultValue: 100,
+      range: [0, 3000],
+      step: 100,
+    },
+    {
+      type: 'input',
+      label: '取值类型',
+      attr: ['rangeMode'],
+      render: (e) => {
+        return e.split(',');
+      },
+      desc: [
+        "'value', 'percent' => 表示 start 值取绝对数值，end 取百分比。",
+      ],
     },
     {
       type: 'input',

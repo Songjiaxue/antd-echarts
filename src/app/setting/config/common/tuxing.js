@@ -8,7 +8,7 @@ export default function (params, flag) {
     {
       type: 'slider',
       label: '图形阴影的模糊大小',
-      attr: [...params, 'textShadowBlur'],
+      attr: [...params, 'shadowBlur'],
       range: [0, 100],
       defaultValue: 0,
     },
